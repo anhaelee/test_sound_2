@@ -46,24 +46,24 @@
 
 
 
-/* Try instantiating a new AudioContext, throw an error if it fails. */
+
 try {
-  /* Setup an AudioContext. */
+ 
   context = new AudioContext();
 
-  /* Create a script processor node with a `bufferSize` of 1024. */
+  
   processor = context.createScriptProcessor(1024);
 
-  /* Create an analyser node */
+
   analyser = context.createAnalyser();
 
-  /* Wire the processor into our audio context. */
+ 
   processor.connect(context.destination);
 
-  /* Wire the analyser into the processor */
+ 
   analyser.connect(processor);
 
-  /* Define a Uint8Array to receive the analysers data. */
+ 
   data = new Uint8Array(analyser.frequencyBinCount);
 } catch(e) {
   throw new Error('The Web Audio API is unavailable');
@@ -81,16 +81,16 @@ var Sound = {
         sound.disconnect();
         sound = null;
 
-        /* Noop the audioprocess handler when the file finishes. */
+    
         processor.onaudioprocess = function() {};
       }
 
-      /* Add the following line to wire into the analyser. */
+     
       sound.connect(analyser);
       sound.connect(context.destination);
 
       processor.onaudioprocess = function() {
-        /* Populate the data array with the frequency data. */
+      
         analyser.getByteTimeDomainData(data);
       };
 
@@ -125,9 +125,11 @@ function loadAudioElement(url) {
   });
 }
 
-// ----------------------------------
+    
+    
+
 // visualization code
-// ----------------------------------
+
 
 const CUBES_NUM = 70
     , STEP = Math.floor(data.length / CUBES_NUM)
@@ -165,7 +167,7 @@ document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     material = new THREE.MeshNormalMaterial(  );
     
     mesh1 = new THREE.Mesh(geometry, material);
-    mesh1.position.x = -1;
+    mesh1.position.x = -2;
     mesh1.rotation.x = 0;
     scene.add(mesh1);
     toDrag.push(mesh1);
@@ -178,7 +180,7 @@ document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 
     mesh3 = new THREE.Mesh(geometry, material);
-    mesh3.position.x = 1;
+    mesh3.position.x = 2;
     mesh3.rotation.x = 0;
     scene.add(mesh3);
     toDrag.push(mesh3);
@@ -243,7 +245,7 @@ render();
 
 
 
-// Pause / play audio on page click
+
 document.body.addEventListener('click', function(ev) {
   if (audio) {
     if (audio.paused()) {
