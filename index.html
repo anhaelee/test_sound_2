@@ -230,11 +230,15 @@ camera.position.z = 1800;
     for (let i = 0, n = 0; i < toDrag.length; i++, n+=STEP) {
     let val = Math.abs(data[n]) / NO_SIGNAL;
 
-    toDrag[i].scale.y -= 0.85;
+    toDrag[i].scale.y -= 1;
     toDrag[i].scale.y += Math.abs(data[n]) / NO_SIGNAL;
+    toDrag[i].scale.x -= 1;
+    toDrag[i].scale.x += Math.abs(data[n]) / NO_SIGNAL;
+
 
     if (toDrag[i].scale.y <= 1) {
       toDrag[i].scale.y = 1;
+      toDrag[i].scale.x = 1;
     }
 
     toDrag[i].position.y = (toDrag[i].scale.y / 2) - 0.5;
@@ -251,7 +255,7 @@ camera.position.z = 1800;
   
     camera.lookAt(scene.position);
     renderer.render(scene, camera);
-}
+    }
 
     render();
 
